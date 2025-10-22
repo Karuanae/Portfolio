@@ -138,7 +138,7 @@ const Hero = () => {
                 <div className="w-12 h-0.5 tech-gradient rounded-full"></div>
                 <Slide direction="right" triggerOnce>
                   <h2 className="text-2xl md:text-3xl text-gray-300 font-light tracking-wide">
-                    Creative Problem Solver
+                    Fullstack Developer
                   </h2>
                 </Slide>
               </motion.div>
@@ -245,7 +245,7 @@ const Hero = () => {
                       
                       {/* Replace the above div with your actual image: */}
                       <img 
-                        src="/public/Profile.jpg" 
+                        src="/Profile.jpg" 
                         alt="Emily Karuana"
                         className="w-full h-full object-cover rounded-2xl"
                       />

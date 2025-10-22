@@ -1,0 +1,74 @@
+/* src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #6366f1;
+  --secondary: #8b5cf6;
+  --accent: #06b6d4;
+  --tech-blue: #2563eb;
+  --tech-purple: #7c3aed;
+  --tech-cyan: #0891b2;
+  --tech-green: #10b981;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  background: #0a0a0a;
+  color: #ffffff;
+}
+
+/* Custom gradients */
+.gradient-text {
+  background: linear-gradient(135deg, var(--tech-cyan) 0%, var(--tech-purple) 50%, var(--tech-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.tech-gradient {
+  background: linear-gradient(135deg, var(--tech-blue) 0%, var(--tech-purple) 50%, var(--tech-cyan) 100%);
+}
+
+.tech-gradient-reverse {
+  background: linear-gradient(135deg, var(--tech-cyan) 0%, var(--tech-purple) 50%, var(--tech-blue) 100%);
+}
+
+/* Glass morphism */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--tech-purple);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--tech-blue);
+}

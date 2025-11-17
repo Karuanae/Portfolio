@@ -1,7 +1,5 @@
 // src/components/Header.jsx
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Code2 } from 'lucide-react';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,117 +21,94 @@ const Header = () => {
     { name: 'Contact', href: '#contact' }
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0, y: -20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut"
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.5
-      }
-    }
-  };
-
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
+    <header
       className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? 'glass-effect py-2' : 'bg-transparent py-4'
+        scrolled 
+          ? 'bg-white/80 backdrop-blur-xl shadow-lg shadow-gray-200/50 py-3' 
+          : 'bg-transparent py-6'
       }`}
     >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="flex justify-between items-center"
-        >
-          <motion.a
+      <nav className="max-w-7xl mx-auto px-6">
+        <div className="flex justify-between items-center">
+          {/* Logo */}
+          <a
             href="#home"
             className="flex items-center space-x-3 group"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
           >
-            <div className="p-2 tech-gradient rounded-lg group-hover:rotate-12 transition-transform duration-300">
-              <Code2 size={24} className="text-white" />
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <span className="text-white font-bold text-lg">EK</span>
             </div>
-            <span className="text-2xl font-bold gradient-text">Emily Karuana</span>
-          </motion.a>
+            <span className={`text-2xl font-bold transition-colors duration-300 ${
+              scrolled ? 'text-gray-900' : 'text-white'
+            }`}>
+              Emily Karuana
+            </span>
+          </a>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-8">
-            {navItems.map((item, index) => (
-              <motion.a
+          <div className="hidden md:flex items-center space-x-1">
+            {navItems.map((item) => (
+              <a
                 key={item.name}
                 href={item.href}
-                variants={itemVariants}
-                initial="hidden"
-                animate="visible"
-                transition={{ delay: index * 0.1 }}
-                className="relative text-gray-300 hover:text-white transition-colors duration-300 font-medium text-sm uppercase tracking-wide group"
-                whileHover={{ y: -2 }}
+                className={`relative px-5 py-2 font-medium text-sm transition-all duration-300 rounded-lg group ${
+                  scrolled 
+                    ? 'text-gray-700 hover:text-blue-600' 
+                    : 'text-white/90 hover:text-white'
+                }`}
               >
                 {item.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 tech-gradient transition-all duration-300 group-hover:w-full"></span>
-              </motion.a>
+                <span className="absolute bottom-1 left-5 right-5 h-0.5 bg-gradient-to-r from-blue-600 to-indigo-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 rounded-full"></span>
+              </a>
             ))}
+            
+            {/* CTA Button */}
+          
           </div>
 
           {/* Mobile Menu Button */}
-          <motion.button
-            className="md:hidden p-2 rounded-lg glass-effect"
+          <button
+            className={`md:hidden p-2 rounded-lg transition-colors duration-300 ${
+              scrolled ? 'bg-gray-100 text-gray-900' : 'bg-white/10 text-white'
+            }`}
             onClick={() => setIsOpen(!isOpen)}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </motion.button>
-        </motion.div>
+            <svg 
+              className="w-6 h-6" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              {isOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
+        </div>
 
         {/* Mobile Menu */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden mt-4 glass-effect rounded-2xl overflow-hidden"
-            >
-              <div className="py-4 space-y-2">
-                {navItems.map((item, index) => (
-                  <motion.a
-                    key={item.name}
-                    href={item.href}
-                    className="block px-6 py-3 text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-300"
-                    onClick={() => setIsOpen(false)}
-                    initial={{ x: -20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: index * 0.1 }}
-                    whileHover={{ x: 10 }}
-                  >
-                    {item.name}
-                  </motion.a>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {isOpen && (
+          <div className="md:hidden mt-4 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+            <div className="py-2">
+              {navItems.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="block px-6 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300 font-medium"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.name}
+                </a>
+              ))}
+             
+            </div>
+          </div>
+        )}
       </nav>
-    </motion.header>
+    </header>
   );
 };
 

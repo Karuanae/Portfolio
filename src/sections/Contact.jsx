@@ -1,17 +1,5 @@
 // src/sections/Contact.jsx
 import React, { useState, useRef } from 'react';
-import { motion } from 'framer-motion';
-import { Fade, Slide } from 'react-awesome-reveal';
-import { 
-  Mail, 
-  Phone, 
-  Github, 
-  MapPin, 
-  Send,
-  MessageCircle,
-  Calendar,
-  Zap
-} from 'lucide-react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -51,179 +39,134 @@ const Contact = () => {
 
   const contactMethods = [
     {
-      icon: <Mail className="text-tech-cyan" size={24} />,
       title: 'Email',
-      value: 'emilykaruanamwang@gmail.com',
-      link: 'mailto:emilykaruanamwang@gmail.com',
-      color: 'from-cyan-500 to-blue-500'
+      value: 'emilykaruanamwangi@gmail.com',
+      link: 'mailto:emilykaruanamwangi@gmail.com'
     },
     {
-      icon: <Phone className="text-tech-green" size={24} />,
       title: 'Phone',
       value: '+254 725 990 958',
-      link: 'tel:+254725990958',
-      color: 'from-green-500 to-emerald-500'
+      link: 'tel:+254725990958'
     },
     {
-      icon: <Github className="text-tech-purple" size={24} />,
       title: 'GitHub',
       value: '@Karuanae',
-      link: 'https://github.com/Karuanae',
-      color: 'from-purple-500 to-pink-500'
+      link: 'https://github.com/Karuanae'
     },
     {
-      icon: <MapPin className="text-tech-blue" size={24} />,
       title: 'Location',
       value: 'Nairobi, Kenya',
-      link: '#',
-      color: 'from-blue-500 to-cyan-500'
+      link: '#'
     }
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.6
-      }
-    }
-  };
-
   return (
-    <section id="contact" className="py-20 relative overflow-hidden">
-      {/* Animated Background */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-0 w-72 h-72 bg-tech-purple/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-tech-cyan/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <Fade direction="up" triggerOnce>
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
-              Let's Connect
-            </h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Ready to bring your ideas to life? Let's discuss your project and create something extraordinary together.
-            </p>
+    <section id="contact" className="py-32 bg-gradient-to-b from-white via-gray-50 to-white relative">
+      <div className="max-w-6xl mx-auto px-6">
+        {/* Section Header */}
+        <div className="max-w-3xl mb-16">
+          <div className="inline-block mb-4">
+            <span className="text-sm font-semibold text-blue-600 tracking-wider uppercase">
+              Get In Touch
+            </span>
           </div>
-        </Fade>
+          <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+            Let's Work
+            <br />
+            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+              Together
+            </span>
+          </h2>
+          <p className="text-xl text-gray-600">
+            Ready to bring your ideas to life? Let's discuss your project and create something extraordinary together.
+          </p>
+          <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full mt-6"></div>
+        </div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid lg:grid-cols-2 gap-12"
-        >
+        <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Information */}
           <div className="space-y-8">
-            <motion.div variants={itemVariants}>
-              <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
-                <MessageCircle className="mr-3 text-tech-cyan" size={28} />
-                Get In Touch
+            <div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                Contact Information
               </h3>
-              <p className="text-gray-400 text-lg leading-relaxed">
+              <p className="text-gray-600 text-lg leading-relaxed">
                 I'm always excited to take on new challenges and collaborate on innovative projects. 
                 Whether you have a specific idea in mind or just want to explore possibilities, 
                 I'd love to hear from you.
               </p>
-            </motion.div>
+            </div>
 
             {/* Contact Methods */}
             <div className="grid gap-4">
-              {contactMethods.map((method, index) => (
-                <motion.a
+              {contactMethods.map((method) => (
+                <a
                   key={method.title}
                   href={method.link}
-                  variants={itemVariants}
-                  className="group p-6 glass-effect rounded-2xl border border-gray-700 hover:border-tech-cyan/50 transition-all duration-300"
-                  whileHover={{ scale: 1.02, y: -2 }}
+                  className="group p-6 bg-white rounded-2xl border-2 border-gray-100 hover:border-blue-200 hover:shadow-lg transition-all duration-300"
                   target={method.title === 'GitHub' ? '_blank' : '_self'}
                   rel={method.title === 'GitHub' ? 'noopener noreferrer' : ''}
                 >
-                  <div className="flex items-center space-x-4">
-                    <div className="p-3 bg-white/5 rounded-xl group-hover:scale-110 transition-transform duration-300">
-                      {method.icon}
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="font-semibold text-white group-hover:text-tech-cyan transition-colors">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h4 className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors mb-1">
                         {method.title}
                       </h4>
-                      <p className="text-gray-400 group-hover:text-gray-300 transition-colors">
+                      <p className="text-gray-600 group-hover:text-gray-900 transition-colors">
                         {method.value}
                       </p>
                     </div>
-                    <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${method.color}`}></div>
+                    <div className="w-2 h-2 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600"></div>
                   </div>
-                </motion.a>
+                </a>
               ))}
             </div>
 
-            {/* Availability & Reference */}
-            <motion.div variants={itemVariants} className="space-y-6">
-              <div className="p-6 tech-gradient rounded-2xl">
-                <div className="flex items-center space-x-3 mb-3">
-                  <Zap className="text-white" size={24} />
-                  <h4 className="font-bold text-white">Current Availability</h4>
-                </div>
-                <p className="text-white/90">
-                  Available for new projects starting next month. Let's schedule a call to discuss your requirements!
+            {/* Availability & Reference - Side by Side */}
+            <div className="grid grid-cols-2 gap-6">
+              <div className="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl border-2 border-blue-100">
+                <h4 className="font-bold text-gray-900 mb-2">Current Availability</h4>
+                <p className="text-gray-700 text-sm">
+                  Available for new projects starting next month. Let's schedule a call!
                 </p>
               </div>
 
-              <div className="p-6 glass-effect rounded-2xl border border-tech-green/20">
-                <h4 className="font-semibold text-white mb-3 flex items-center">
-                  <Calendar className="mr-2 text-tech-green" size={20} />
-                  Professional Reference
+              <div className="p-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl border-2 border-green-100">
+                <h4 className="font-bold text-gray-900 mb-3">
+                  Reference
                 </h4>
-                <div className="space-y-2 text-sm">
-                  <p className="text-gray-300 font-medium">Peter Mwangi</p>
-                  <p className="text-gray-400">Dikoras Limited</p>
-                  <p className="text-gray-400">+254 725 086009</p>
-                  <p className="text-gray-400">petermwangi@gmail.com</p>
+                <div className="space-y-1 text-sm">
+                  <p className="text-gray-700 font-medium">Peter Mwangi</p>
+                  <p className="text-gray-600">Dikoras Limited</p>
+                  <p className="text-gray-600">+254 725 086009</p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
 
           {/* Contact Form */}
-          <motion.div variants={itemVariants} className="relative">
-            <div className="glass-effect rounded-3xl p-8 border border-gray-700">
+          <div className="relative">
+            <div className="bg-white rounded-3xl p-8 border-2 border-gray-100 shadow-lg">
               {isSubmitted ? (
-                <motion.div
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  className="text-center py-12"
-                >
-                  <div className="w-16 h-16 bg-tech-green/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Send className="text-tech-green" size={32} />
+                <div className="text-center py-12">
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-green-600">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
-                  <p className="text-gray-400">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Message Sent!</h3>
+                  <p className="text-gray-600">
                     Thank you for reaching out. I'll get back to you within 24 hours.
                   </p>
-                </motion.div>
+                </div>
               ) : (
                 <>
-                  <h3 className="text-2xl font-bold text-white mb-6">Send a Message</h3>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-6">Send a Message</h3>
                   <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                          Full Name *
+                        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                          Full Name
                         </label>
                         <input
                           type="text"
@@ -232,14 +175,14 @@ const Contact = () => {
                           value={formData.name}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 bg-white/5 border border-gray-600 rounded-xl focus:ring-2 focus:ring-tech-cyan focus:border-transparent transition-all duration-300 text-white placeholder-gray-400"
+                          className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 text-gray-900 placeholder-gray-400"
                           placeholder="Your full name"
                         />
                       </div>
                       
                       <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                          Email Address *
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                          Email Address
                         </label>
                         <input
                           type="email"
@@ -248,15 +191,15 @@ const Contact = () => {
                           value={formData.email}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 bg-white/5 border border-gray-600 rounded-xl focus:ring-2 focus:ring-tech-cyan focus:border-transparent transition-all duration-300 text-white placeholder-gray-400"
+                          className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 text-gray-900 placeholder-gray-400"
                           placeholder="your.email@example.com"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
-                        Subject *
+                      <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+                        Subject
                       </label>
                       <input
                         type="text"
@@ -265,14 +208,14 @@ const Contact = () => {
                         value={formData.subject}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 bg-white/5 border border-gray-600 rounded-xl focus:ring-2 focus:ring-tech-cyan focus:border-transparent transition-all duration-300 text-white placeholder-gray-400"
+                        className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 text-gray-900 placeholder-gray-400"
                         placeholder="Project discussion"
                       />
                     </div>
                     
                     <div>
-                      <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                        Message *
+                      <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                        Message
                       </label>
                       <textarea
                         id="message"
@@ -281,17 +224,15 @@ const Contact = () => {
                         onChange={handleChange}
                         required
                         rows="6"
-                        className="w-full px-4 py-3 bg-white/5 border border-gray-600 rounded-xl focus:ring-2 focus:ring-tech-cyan focus:border-transparent transition-all duration-300 text-white placeholder-gray-400 resize-none"
+                        className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 text-gray-900 placeholder-gray-400 resize-none"
                         placeholder="Tell me about your project, timeline, and requirements..."
                       ></textarea>
                     </div>
                     
-                    <motion.button
+                    <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full tech-gradient py-4 px-6 rounded-xl text-white font-semibold flex items-center justify-center space-x-3 disabled:opacity-50 disabled:cursor-not-allowed"
-                      whileHover={{ scale: isSubmitting ? 1 : 1.02, y: -2 }}
-                      whileTap={{ scale: 0.98 }}
+                      className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 py-4 px-6 rounded-xl text-white font-semibold flex items-center justify-center space-x-3 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-300"
                     >
                       {isSubmitting ? (
                         <>
@@ -300,17 +241,20 @@ const Contact = () => {
                         </>
                       ) : (
                         <>
-                          <Send size={20} />
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                          </svg>
                           <span>Send Message</span>
                         </>
                       )}
-                    </motion.button>
+                    </button>
                   </form>
                 </>
               )}
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );

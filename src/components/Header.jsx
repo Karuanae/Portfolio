@@ -4,21 +4,37 @@ import React, { useState, useEffect } from 'react';
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+      
+      // Update active section based on scroll position
+      const sections = ['home', 'about', 'skills', 'services', 'projects', 'contact'];
+      const current = sections.find(section => {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return rect.top <= 100 && rect.bottom >= 100;
+        }
+        return false;
+      });
+      
+      if (current) setActiveSection(current);
     };
+    
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Contact', href: '#contact' }
+    { name: 'Home', href: '#home', section: 'home' },
+    { name: 'About', href: '#about', section: 'about' },
+    { name: 'Skills', href: '#skills', section: 'skills' },
+    { name: 'Services', href: '#services', section: 'services' },
+    { name: 'Projects', href: '#projects', section: 'projects' },
+    { name: 'Contact', href: '#contact', section: 'contact' }
   ];
 
   return (
@@ -54,17 +70,35 @@ const Header = () => {
                 href={item.href}
                 className={`relative px-5 py-2 font-medium text-sm transition-all duration-300 rounded-lg group ${
                   scrolled 
-                    ? 'text-gray-700 hover:text-blue-600' 
-                    : 'text-white/90 hover:text-white'
+                    ? activeSection === item.section
+                      ? 'text-blue-600 bg-blue-50'
+                      : 'text-gray-700 hover:text-blue-600 hover:bg-blue-50'
+                    : activeSection === item.section
+                      ? 'text-white bg-white/10'
+                      : 'text-white/90 hover:text-white hover:bg-white/5'
                 }`}
               >
                 {item.name}
-                <span className="absolute bottom-1 left-5 right-5 h-0.5 bg-gradient-to-r from-blue-600 to-indigo-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 rounded-full"></span>
+                {item.section === 'services' && (
+                  <span className="absolute -top-1 -right-1 px-1.5 py-0.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs rounded-full animate-pulse">
+                    New
+                  </span>
+                )}
+                <span className={`absolute bottom-1 left-5 right-5 h-0.5 rounded-full transition-transform duration-300 ${
+                  activeSection === item.section 
+                    ? 'scale-x-100 bg-gradient-to-r from-blue-600 to-indigo-600' 
+                    : 'scale-x-0 group-hover:scale-x-100 bg-gradient-to-r from-blue-400 to-indigo-400'
+                }`}></span>
               </a>
             ))}
             
             {/* CTA Button */}
-          
+            <a
+              href="#contact"
+              className="ml-4 px-6 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-semibold rounded-xl hover:shadow-lg hover:shadow-blue-500/30 hover:scale-105 transition-all duration-300"
+            >
+              Get Quote
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -97,13 +131,28 @@ const Header = () => {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="block px-6 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300 font-medium"
+                  className={`flex items-center justify-between px-6 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300 font-medium ${
+                    activeSection === item.section ? 'bg-blue-50 text-blue-600' : ''
+                  }`}
                   onClick={() => setIsOpen(false)}
                 >
-                  {item.name}
+                  <span>{item.name}</span>
+                  {item.section === 'services' && (
+                    <span className="px-2 py-0.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs rounded-full">
+                      New
+                    </span>
+                  )}
                 </a>
               ))}
-             
+              <div className="px-6 py-3 border-t border-gray-100">
+                <a
+                  href="#contact"
+                  className="block text-center px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-medium hover:shadow-lg transition-all"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Get Quote
+                </a>
+              </div>
             </div>
           </div>
         )}

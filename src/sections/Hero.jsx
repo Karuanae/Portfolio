@@ -4,7 +4,7 @@ import { Github, Mail, Download, ArrowRight, Sparkles, Code2 } from 'lucide-reac
 
 const Hero = () => {
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-blue-50/30 to-white py-24 px-6 relative overflow-hidden">
+    <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-blue-50/30 to-white py-32 px-6 relative overflow-hidden">
       {/* Subtle Background Pattern */}
       <div className="absolute inset-0 opacity-[0.03]">
         <div className="absolute inset-0" style={{

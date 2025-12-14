@@ -150,7 +150,10 @@ const Projects = () => {
 
   return (
     <section id="projects" className="py-32 bg-white relative">
-      <div className="max-w-6xl mx-auto px-6">
+      {/* Subtle Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-50/30 via-white to-white"></div>
+      
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
         {/* Section Header */}
         <div className="max-w-3xl mb-16">
           <div className="inline-block mb-4">
